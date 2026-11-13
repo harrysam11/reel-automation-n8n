@@ -1,0 +1,13 @@
+scene_id,start_sec,end_sec,duration_sec,scene_name,visual_elements,audio_cue,slide_index
+S01,0,5,5,Hook,"Sunglasses Cat mascot, Big Headline: SIP ya FD? 95-Sec Reality Check","अगर आप SIP या FD कर रहे हो...",1
+S02,5,13,8,Question,"Smug Cat reaction, Floating speech bubble: Bank me paisa safe hai ya galatfehmi?","क्या कभी सोचा है कि आपका पैसा...",2
+S03,13,25,12,SIP_Explanation,"Step-by-step ₹1,000 monthly SIP compounding diagram, Index growth visual","पहले बात करते हैं SIP की...",3
+S04,25,34,9,SIP_Risk,"Shocked Cat reaction, Falling market line, Red drawdown warning box","लेकिन ध्यान रहे, शेयर बाज़ार...",4
+S05,34,45,11,FD_Explanation,"Fixed Deposit guaranteed interest card vs post-tax calculation","अब आते हैं FD यानी Fixed Deposit पर...",5
+S06,45,55,10,Inflation_Trap,"Inflation erosion graph: 7% FD minus 6% Inflation minus 30% Tax = Negative real return","टैक्स और छह परसेंट की इन्फ्लेशन के बाद...",6
+S07,55,64,9,DICGC_Fact,"Official DICGC RBI shield: ₹5 Lakh max deposit insurance card","और हाँ, बैंक डूबने पर DICGC...",7
+S08,64,69,5,Capital_Map_Tier1,"Tier 1 Chart: ₹100 to ₹5,000 (MF, ETF, Stocks, PPF)","सस्ते ऑप्शंस: सौ रुपये से शुरू...",8
+S09,69,74,5,Capital_Map_Tier2,"Tier 2 Chart: ₹10,000 to ₹5 Lakh (G-Sec, SGB, Corporate Bonds)","मिड टियर ऑप्शंस: दस हज़ार से...",9
+S10,74,79,5,Capital_Map_Tier3,"Tier 3 Chart: ₹20 Lakh to ₹1 Crore+ (Real Estate, PMS ₹50L, AIF ₹1Cr)","और हाई नेट वर्थ ऑप्शंस...",10
+S11,79,87,8,Upcoming_Teaser,"Next 4 Reels preview cards: SIP vs Lump Sum, FD vs Debt Funds, Inflation, First ₹1,000","हमारे आने वाले रील्स में...",11
+S12,87,95,8,Follow_CTA,"Sunglasses Cat mascot, Brand Logo, Big Follow Button & Disclaimer","अभी Follow बटन दबाइये और बनिए...",12

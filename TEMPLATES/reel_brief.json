@@ -1,0 +1,19 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "project_id": "REEL_001_SIP_FD_REALITY_CHECK",
+  "title": "SIP & FD Users — Reality Check",
+  "topic": "Systematic Investment Plan (SIP) vs Fixed Deposit (FD) Risk & Return Reality Check",
+  "target_duration_seconds": 95,
+  "language_mix": "Hinglish (Devanagari Hindi + Latin Financial Terms)",
+  "hook": "Agar aap SIP ya FD kar rahe ho, toh yeh 95 seconds aapke hazaron bacha sakte hain!",
+  "target_audience": "Indian retail investors (20-35 years old)",
+  "compliance_disclaimer": "Educational content only. Securities investments are subject to market risks. Read all scheme related documents carefully.",
+  "workflow_status": "draft",
+  "approvals": {
+    "research_fact_check": false,
+    "script_approved": false,
+    "slide_design_approved": false,
+    "tts_audio_approved": false,
+    "final_export_approved": false
+  }
+}

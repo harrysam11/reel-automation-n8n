@@ -1,0 +1,24 @@
+workflow_name,node_name,node_type,endpoint_or_action,input_params,output_artifacts,human_gate
+WF01_Intake,Intake_Webhook,n8n-nodes-base.webhook,POST /reel-intake,JSON {project_id, title, duration},project_brief,No
+WF01_Intake,Validate_Brief,n8n-nodes-base.code,JavaScript schema validation,JSON payload,validated_brief,No
+WF01_Intake,Init_Project_Tree,n8n-nodes-base.httpRequest,POST /api/init-project,project_id,directory_structure,No
+WF02_Script,Fetch_Research,n8n-nodes-base.httpRequest,GET /api/research-sources,project_id,sources.txt,No
+WF02_Script,Ollama_Draft,n8n-nodes-base.httpRequest,POST http://host:11434/api/generate,prompt + financial facts,draft_script,No
+WF02_Script,Gate_Fact_Check,n8n-nodes-base.webhook,POST /approve/script,approval_status,script_approved_event,Yes
+WF03_Slides,Check_Rights,n8n-nodes-base.code,CSV manifest rights verification,asset_manifest.csv,rights_ok,No
+WF03_Slides,Build_PPTX,n8n-nodes-base.httpRequest,POST /api/generate-slides,project_id,reel_001_slides.pptx,No
+WF03_Slides,Export_PNGs,n8n-nodes-base.httpRequest,POST /api/export-slides,project_id,slide-01.png to slide-12.png,No
+WF03_Slides,Gate_Slide_Review,n8n-nodes-base.webhook,POST /approve/slides,approval_status,slides_approved_event,Yes
+WF04_Audio,Synthesize_TTS,n8n-nodes-base.httpRequest,POST /api/generate-audio,clean_script,voiceover.wav + preview.mp3,No
+WF04_Audio,Sync_Captions,n8n-nodes-base.code,SRT generator,scene_script.csv,captions.srt,No
+WF04_Audio,Gate_Audio_Review,n8n-nodes-base.webhook,POST /approve/audio,approval_status,audio_approved_event,Yes
+WF05_Video,FFmpeg_Assemble,n8n-nodes-base.httpRequest,POST /api/render-video,slides + audio + srt,reel_001_final.mp4,No
+WF05_Video,Validate_Specs,n8n-nodes-base.code,Probe verification (1080x1920, 30fps),ffprobe output,qc_pass,No
+WF05_Video,Gate_Video_Review,n8n-nodes-base.webhook,POST /approve/video,approval_status,video_approved_event,Yes
+WF06_Delivery,Package_Bundle,n8n-nodes-base.httpRequest,POST /api/package-delivery,project_id,DELIVERY_PACK.zip,No
+WF06_Delivery,Android_Notify,n8n-nodes-base.code,Generate USB/Local transfer instruction,delivery_zip,transfer_ready,No
+WF07_AssetFinder,Asset_Search_Webhook,n8n-nodes-base.webhook,POST /asset-search,JSON {query, limit},search_request,No
+WF07_AssetFinder,Search_CC_API,n8n-nodes-base.httpRequest,POST /api/find-assets,query + limit,candidate_assets,No
+WF07_AssetFinder,Format_Candidates,n8n-nodes-base.code,Extract license & attribution,candidates,formatted_candidates,No
+WF07_AssetFinder,Asset_Grab_Webhook,n8n-nodes-base.webhook,POST /asset-grab,JSON {url, dest},grab_request,No
+WF07_AssetFinder,Download_And_Log,n8n-nodes-base.httpRequest,POST /api/grab-asset,url + dest,manifest_updated,No

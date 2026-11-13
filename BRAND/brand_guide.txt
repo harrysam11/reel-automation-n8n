@@ -1,0 +1,29 @@
+# Finance Reel Factory — Brand Identity Guide
+
+## 1. Visual Identity
+- Layout: 1080 x 1920 (9:16 Vertical Video format for Reels / Shorts)
+- Background Color: #F4EBDD (Warm cream / paper card finish)
+- Primary Accent: #1A1A1A (Deep charcoal / black text for maximum readability)
+- Bullish / Growth Accent: #16A34A (Green badge)
+- Risk / Alert Accent: #DC2626 (Red badge)
+- Card Containers: #FFFFFF with 12px rounded corners and subtle drop shadow
+
+## 2. Mascot & Character Rules
+- Host: Sunglasses Cat (`BRAND/main_cat.png`)
+- Role: Savvy, pragmatic, no-nonsense financial guide.
+- Recurring Host Rule: Main cat introduces the hook, anchors transitions, and closes with the CTA.
+- Meme Expressions: Authentic cat reaction photos (shocked, smug, calculating, facepalm).
+- NO AI morphing or distorted AI cat generation; preserve crisp cartoon/authentic mascot identity.
+
+## 3. Typography & Language (Hinglish)
+- Latin Script: Bold Sans (Inter, Montserrat, Arial Black) for numbers and English terms (SIP, FD, DICGC, Nifty 50, CAGR).
+- Devanagari Script: Noto Sans Devanagari for spoken Hindi narration text.
+- Hierarchy:
+  - Big Hook Headline: 48-64pt Bold
+  - Supporting Subhead / Question: 32-40pt Medium
+  - Data / Table / Chart Numbers: 36-48pt Bold Monospace/Sans
+  - Footnote / Disclaimer: 18-24pt Regular
+
+## 4. Automation Boundary & Compliance
+- Financial Fact-Checking: Human verified via official SEBI/RBI/AMFI sources.
+- Disclaimer: Educational purposes only; not SEBI-registered investment advice.

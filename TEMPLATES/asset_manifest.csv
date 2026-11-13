@@ -1,0 +1,10 @@
+asset_id,file_path,category,source_url,license_type,rights_verified,notes
+M001,BRAND/main_cat.png,mascot,original_upload,proprietary,false,Primary sunglasses cat host
+L001,BRAND/logo.png,branding,internal,proprietary,true,Finance Reel Factory watermark logo
+R001,PROJECTS/REEL_001_SIP_FD_REALITY_CHECK/04_ASSETS/cat_reactions/smug_cat.png,reaction,wikimedia_or_cc0,cc0_public_domain,false,Smug cat reaction for question slide
+R002,PROJECTS/REEL_001_SIP_FD_REALITY_CHECK/04_ASSETS/cat_reactions/shocked_cat.png,reaction,wikimedia_or_cc0,cc0_public_domain,false,Shocked cat reaction for market dip slide
+R003,PROJECTS/REEL_001_SIP_FD_REALITY_CHECK/04_ASSETS/cat_reactions/thinking_cat.png,reaction,wikimedia_or_cc0,cc0_public_domain,false,Thinking cat reaction for capital map slides
+C001,PROJECTS/REEL_001_SIP_FD_REALITY_CHECK/04_ASSETS/charts/capital_map_01.png,chart,generated_python,cc0_public_domain,true,Tier 1 capital map (100 to 5000)
+C002,PROJECTS/REEL_001_SIP_FD_REALITY_CHECK/04_ASSETS/charts/capital_map_02.png,chart,generated_python,cc0_public_domain,true,Tier 2 capital map (10000 to 5 lakh)
+C003,PROJECTS/REEL_001_SIP_FD_REALITY_CHECK/04_ASSETS/charts/capital_map_03.png,chart,generated_python,cc0_public_domain,true,Tier 3 capital map (20 lakh to 1 crore+)
+GRAB_CC0_FUNN,PROJECTS/REEL_001_SIP_FD_REALITY_CHECK/04_ASSETS/cat_reactions/cc0_funny_cat.jpg,reaction,https://upload.wikimedia.org/wikipedia/commons/7/76/Cat_inside_a_wong_container_funny_2025_sns_s_%281%29.jpg,cc_by_sa_or_pd,false,Auto-grabbed via Asset Finder

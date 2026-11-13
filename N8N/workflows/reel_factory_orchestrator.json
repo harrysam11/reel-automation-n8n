@@ -1,0 +1,244 @@
+{
+  "name": "Finance Reel Factory - Master Orchestrator",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "reel-intake",
+        "options": {}
+      },
+      "id": "node-intake-trigger",
+      "name": "Reel Intake Trigger",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [240, 300]
+    },
+    {
+      "parameters": {
+        "jsCode": "const brief = $input.item.json.body || $input.item.json;\nif (!brief.project_id) {\n  brief.project_id = 'REEL_001_SIP_FD_REALITY_CHECK';\n}\nif (!brief.target_duration) {\n  brief.target_duration = 95;\n}\nbrief.created_at = new Date().toISOString();\nreturn { json: brief };"
+      },
+      "id": "node-validate-brief",
+      "name": "Validate Brief",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [460, 300]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "http://192.168.122.1:8085/api/generate-slides",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "X-API-Key",
+              "value": "reel-factory-secret-token-2026"
+            },
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"project_id\": \"{{ $json.project_id }}\"\n}",
+        "options": {}
+      },
+      "id": "node-generate-slides",
+      "name": "Generate Slides PPTX",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [700, 300]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "http://192.168.122.1:8085/api/export-slides",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "X-API-Key",
+              "value": "reel-factory-secret-token-2026"
+            },
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"project_id\": \"{{ $('Validate Brief').item.json.project_id }}\"\n}",
+        "options": {}
+      },
+      "id": "node-export-slides",
+      "name": "Export Slides PNG",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [940, 300]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "http://192.168.122.1:8085/api/generate-audio",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "X-API-Key",
+              "value": "reel-factory-secret-token-2026"
+            },
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"project_id\": \"{{ $('Validate Brief').item.json.project_id }}\"\n}",
+        "options": {}
+      },
+      "id": "node-generate-audio",
+      "name": "Generate Audio",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [1180, 300]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "http://192.168.122.1:8085/api/render-video",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "X-API-Key",
+              "value": "reel-factory-secret-token-2026"
+            },
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"project_id\": \"{{ $('Validate Brief').item.json.project_id }}\"\n}",
+        "options": {}
+      },
+      "id": "node-render-video",
+      "name": "Render Video FFmpeg",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [1420, 300]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "http://192.168.122.1:8085/api/package-delivery",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "X-API-Key",
+              "value": "reel-factory-secret-token-2026"
+            },
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"project_id\": \"{{ $('Validate Brief').item.json.project_id }}\"\n}",
+        "options": {}
+      },
+      "id": "node-package-delivery",
+      "name": "Package Delivery ZIP",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [1660, 300]
+    }
+  ],
+  "connections": {
+    "Reel Intake Trigger": {
+      "main": [
+        [
+          {
+            "node": "Validate Brief",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Validate Brief": {
+      "main": [
+        [
+          {
+            "node": "Generate Slides PPTX",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Generate Slides PPTX": {
+      "main": [
+        [
+          {
+            "node": "Export Slides PNG",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Export Slides PNG": {
+      "main": [
+        [
+          {
+            "node": "Generate Audio",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Generate Audio": {
+      "main": [
+        [
+          {
+            "node": "Render Video FFmpeg",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Render Video FFmpeg": {
+      "main": [
+        [
+          {
+            "node": "Package Delivery ZIP",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "tags": [
+    {
+      "name": "Reel Factory"
+    }
+  ]
+}

@@ -1,0 +1,139 @@
+{
+  "name": "Finance Reel Factory - Asset Finder & Grabber",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "asset-search",
+        "options": {}
+      },
+      "id": "node-asset-search-trigger",
+      "name": "Asset Search Webhook",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [240, 300]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "http://192.168.122.1:8085/api/find-assets",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "X-API-Key",
+              "value": "reel-factory-secret-token-2026"
+            },
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"query\": \"{{ $json.body.query || 'funny cat reaction' }}\",\n  \"limit\": {{ $json.body.limit || 5 }}\n}",
+        "options": {}
+      },
+      "id": "node-query-assets",
+      "name": "Search Creative Commons API",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [480, 300]
+    },
+    {
+      "parameters": {
+        "jsCode": "const results = $input.item.json.results || [];\n// Formats candidate assets with license info for human review\nreturn results.map((item, idx) => ({\n  json: {\n    candidate_id: idx + 1,\n    title: item.title,\n    url: item.url,\n    license: item.license,\n    usage_terms: item.usage_terms,\n    artist: item.artist,\n    resolution: `${item.width}x${item.height}`\n  }\n}));"
+      },
+      "id": "node-format-candidates",
+      "name": "Format Candidates",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [720, 300]
+    },
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "asset-grab",
+        "options": {}
+      },
+      "id": "node-asset-grab-trigger",
+      "name": "Grab Approved Asset Webhook",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [240, 500]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "http://192.168.122.1:8085/api/grab-asset",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "X-API-Key",
+              "value": "reel-factory-secret-token-2026"
+            },
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"url\": \"{{ $json.body.url }}\",\n  \"dest\": \"{{ $json.body.dest || 'PROJECTS/REEL_001_SIP_FD_REALITY_CHECK/04_ASSETS/cat_reactions/grabbed_asset.png' }}\"\n}",
+        "options": {}
+      },
+      "id": "node-grab-and-log",
+      "name": "Download & Log to Manifest",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [480, 500]
+    }
+  ],
+  "connections": {
+    "Asset Search Webhook": {
+      "main": [
+        [
+          {
+            "node": "Search Creative Commons API",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Search Creative Commons API": {
+      "main": [
+        [
+          {
+            "node": "Format Candidates",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Grab Approved Asset Webhook": {
+      "main": [
+        [
+          {
+            "node": "Download & Log to Manifest",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "tags": [
+    {
+      "name": "Asset Finder"
+    }
+  ]
+}
