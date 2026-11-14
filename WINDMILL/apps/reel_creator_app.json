@@ -1,0 +1,40 @@
+{
+  "summary": "Finance Reel Factory - Mobile Creator App",
+  "description": "Mobile-friendly control panel to trigger and inspect reel generation from your phone",
+  "schema": {
+    "type": "object",
+    "properties": {
+      "project_id": {
+        "type": "string",
+        "title": "Project ID",
+        "default": "REEL_001_SIP_FD_REALITY_CHECK"
+      },
+      "voice": {
+        "type": "string",
+        "title": "Narrator Voice",
+        "default": "hm_omega",
+        "enum": ["hm_omega", "hm_psi", "hf_alpha", "hf_beta", "am_adam"],
+        "enumNames": [
+          "Hindi Male (hm_omega)",
+          "Hinglish Male (hm_psi)",
+          "Hindi Female (hf_alpha)",
+          "Hindi Female (hf_beta)",
+          "English Male (am_adam)"
+        ]
+      },
+      "speed": {
+        "type": "number",
+        "title": "Speech Speed",
+        "default": 1.05,
+        "minimum": 0.8,
+        "maximum": 1.4
+      }
+    }
+  },
+  "ui": {
+    "action_button": {
+      "label": "🚀 Generate Reel Now",
+      "flow": "f/finance_reels/reel_factory_pipeline"
+    }
+  }
+}

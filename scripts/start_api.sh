@@ -23,8 +23,7 @@ if [ -f "$PID_FILE" ]; then
     fi
 fi
 
-source .venv/bin/activate
-nohup python scripts/local_render_api.py >> "$LOG_FILE" 2>&1 &
+nohup "$ROOT_DIR/.venv/bin/python" "$ROOT_DIR/scripts/local_render_api.py" >> "$LOG_FILE" 2>&1 &
 NEW_PID=$!
 echo "$NEW_PID" > "$PID_FILE"
 

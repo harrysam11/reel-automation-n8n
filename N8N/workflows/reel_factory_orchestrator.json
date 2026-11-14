@@ -26,7 +26,7 @@
     {
       "parameters": {
         "method": "POST",
-        "url": "http://192.168.122.1:8085/api/generate-slides",
+        "url": "http://192.168.0.105:8085/api/generate-slides",
         "sendHeaders": true,
         "headerParameters": {
           "parameters": [
@@ -54,7 +54,7 @@
     {
       "parameters": {
         "method": "POST",
-        "url": "http://192.168.122.1:8085/api/export-slides",
+        "url": "http://192.168.0.105:8085/api/export-slides",
         "sendHeaders": true,
         "headerParameters": {
           "parameters": [
@@ -82,7 +82,7 @@
     {
       "parameters": {
         "method": "POST",
-        "url": "http://192.168.122.1:8085/api/generate-audio",
+        "url": "http://192.168.0.105:8085/api/generate-audio",
         "sendHeaders": true,
         "headerParameters": {
           "parameters": [
@@ -110,7 +110,7 @@
     {
       "parameters": {
         "method": "POST",
-        "url": "http://192.168.122.1:8085/api/render-video",
+        "url": "http://192.168.0.105:8085/api/render-video",
         "sendHeaders": true,
         "headerParameters": {
           "parameters": [
@@ -138,7 +138,7 @@
     {
       "parameters": {
         "method": "POST",
-        "url": "http://192.168.122.1:8085/api/package-delivery",
+        "url": "http://192.168.0.105:8085/api/package-delivery",
         "sendHeaders": true,
         "headerParameters": {
           "parameters": [

@@ -1,0 +1,95 @@
+summary: Finance Reel Factory - Complete Automated Video Pipeline
+description: |
+  End-to-end local-first automation pipeline for finance reels:
+  1. Generate editable PowerPoint slides (python-pptx)
+  2. Export slides to 1080x1920 PNGs (LibreOffice + pdftoppm)
+  3. Synthesize voiceover narration (Kokoro-82M TTS)
+  4. Render 1080x1920 30fps vertical MP4 (FFmpeg)
+  5. Package complete bundle into a ZIP for Android review
+
+value:
+  modules:
+    - id: generate_slides
+      summary: Generate PowerPoint Deck
+      value:
+        type: script
+        path: f/finance_reels/generate_slides
+        input_transforms:
+          project_id:
+            type: javascript
+            expr: flow_input.project_id
+
+    - id: export_slides
+      summary: Export Slides to PNG
+      value:
+        type: script
+        path: f/finance_reels/export_slides
+        input_transforms:
+          project_id:
+            type: javascript
+            expr: flow_input.project_id
+      depends_on:
+        - generate_slides
+
+    - id: generate_tts
+      summary: Synthesize Kokoro-82M Voiceover
+      value:
+        type: script
+        path: f/finance_reels/generate_tts
+        input_transforms:
+          project_id:
+            type: javascript
+            expr: flow_input.project_id
+          voice:
+            type: javascript
+            expr: flow_input.voice || "hm_omega"
+          speed:
+            type: javascript
+            expr: flow_input.speed || 1.05
+      depends_on:
+        - generate_slides
+
+    - id: render_video
+      summary: Render 1080x1920 MP4 Video
+      value:
+        type: script
+        path: f/finance_reels/render_video
+        input_transforms:
+          project_id:
+            type: javascript
+            expr: flow_input.project_id
+      depends_on:
+        - export_slides
+        - generate_tts
+
+    - id: package_delivery
+      summary: Bundle Delivery Pack for Android
+      value:
+        type: script
+        path: f/finance_reels/package_delivery
+        input_transforms:
+          project_id:
+            type: javascript
+            expr: flow_input.project_id
+      depends_on:
+        - render_video
+
+schema:
+  $schema: "https://json-schema.org/draft/2020-12/schema"
+  type: object
+  properties:
+    project_id:
+      type: string
+      default: "REEL_001_SIP_FD_REALITY_CHECK"
+      description: "Unique Reel project identifier"
+    voice:
+      type: string
+      default: "hm_omega"
+      enum: ["hm_omega", "hm_psi", "hf_alpha", "hf_beta", "am_adam"]
+      description: "Kokoro TTS Narrator Voice (hm_omega = Hindi Male, am_adam = English Male)"
+    speed:
+      type: number
+      default: 1.05
+      description: "Speech rate multiplier"
+  required:
+    - project_id
