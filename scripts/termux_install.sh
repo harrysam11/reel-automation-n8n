@@ -35,13 +35,12 @@ if [ ! -d "$HOME/storage" ]; then
 fi
 
 # 3. Install remaining Python packages with --break-system-packages flag
-# In Termux (Python 3.12+), --break-system-packages is required to allow pip package installation.
-echo "[3/4] Installing Python dependencies..."
-pip install --break-system-packages --no-cache-dir requests pydantic soundfile || {
+echo "[3/4] Installing Python dependencies (edge-tts for neural speech, requests, pydantic)..."
+pip install --break-system-packages --no-cache-dir edge-tts requests pydantic || {
     echo "Using python virtualenv fallback..."
     python3 -m venv "$HOME/.termux_reel_venv"
     source "$HOME/.termux_reel_venv/bin/activate"
-    pip install requests pydantic soundfile
+    pip install edge-tts requests pydantic
 }
 
 # 4. Create directories & generate brand placeholders

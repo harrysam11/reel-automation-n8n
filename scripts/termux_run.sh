@@ -12,34 +12,30 @@ PROJECT_ID="${1:-REEL_001_SIP_FD_REALITY_CHECK}"
 PROJECT_DIR="PROJECTS/$PROJECT_ID"
 
 echo "=================================================================="
-echo " Running Native Reel Factory inside Termux: $PROJECT_ID"
+echo " Running Automated Reel Platform: $PROJECT_ID"
 echo "=================================================================="
 
-echo ""
-echo "[Step 1/4] Rendering 1080x1920 slides natively (Zero LibreOffice dependency)..."
-python scripts/render_slides_native.py
+# Check virtualenv if it was used
+if [ -d "$HOME/.termux_reel_venv" ]; then
+    source "$HOME/.termux_reel_venv/bin/activate"
+fi
 
-echo ""
-echo "[Step 2/4] Generating voiceover audio narration..."
-python scripts/tts_generator.py
+VOICE="${2:-hi-IN-MadhurNeural}"
 
-echo ""
-echo "[Step 3/4] Assembling 1080x1920 MP4 vertical reel with Termux FFmpeg..."
-python scripts/render_video.py
+# Run automated multi-video platform with real neural TTS & burned-in captions
+python3 generate_new_reel.py --project "$PROJECT_ID" --voice "$VOICE"
 
-echo ""
-echo "[Step 4/4] Bundling package and exporting to Android Storage..."
-python scripts/package_delivery.py "$PROJECT_ID"
-
-# Export directly to Android Downloads folder if storage permission exists
-OUT_MP4="$PROJECT_DIR/08_EXPORT/reel_001_final.mp4"
+# Export directly to Android Downloads folder
+OUT_MP4="$PROJECT_DIR/08_EXPORT/reel_final.mp4"
 OUT_ZIP="OUTPUTS/${PROJECT_ID}_DELIVERY_PACK.zip"
 
 PHONE_DL="$HOME/storage/downloads"
 if [ -d "$PHONE_DL" ]; then
     cp "$OUT_MP4" "$PHONE_DL/${PROJECT_ID}_final.mp4"
     cp "$OUT_ZIP" "$PHONE_DL/"
-    echo "  -> Saved directly to Android Downloads: $PHONE_DL/${PROJECT_ID}_final.mp4"
+    echo ""
+    echo "  -> Saved directly to Phone Gallery/Downloads:"
+    echo "     $PHONE_DL/${PROJECT_ID}_final.mp4"
 fi
 
 echo ""
