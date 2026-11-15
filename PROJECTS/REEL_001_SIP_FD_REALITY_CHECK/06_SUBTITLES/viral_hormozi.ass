@@ -1,0 +1,124 @@
+[Script Info]
+Title: Viral Reel Hormozi Captions
+ScriptType: v4.00+
+WrapStyle: 0
+ScaledBorderAndShadow: yes
+YCbCr Matrix: TV.601
+PlayResX: 1080
+PlayResY: 1920
+
+[V4+ Styles]
+Format: Name, Fontname, Fontsize, PrimaryColour, SecondaryColour, OutlineColour, BackColour, Bold, Italic, Underline, StrikeOut, ScaleX, ScaleY, Spacing, Angle, BorderStyle, Outline, Shadow, Alignment, MarginL, MarginR, MarginV, Encoding
+Style: HormoziViral,Noto Sans,46,&H0000FFFF,&H000000FF,&H00000000,&H80000000,-1,0,0,0,100,100,0,0,1,6,3,2,60,60,420,1
+
+[Events]
+Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
+Dialogue: 0,0:00:00.00,0:00:00.56,HormoziViral,,0,0,0,,{\b1}अगर आप{\b0}
+Dialogue: 0,0:00:00.56,0:00:01.11,HormoziViral,,0,0,0,,{\b1}SIP या 📈{\b0}
+Dialogue: 0,0:00:01.11,0:00:01.67,HormoziViral,,0,0,0,,{\b1}FD कर 🏦{\b0}
+Dialogue: 0,0:00:01.67,0:00:02.22,HormoziViral,,0,0,0,,{\b1}रहे हो,{\b0}
+Dialogue: 0,0:00:02.22,0:00:02.78,HormoziViral,,0,0,0,,{\b1}तो ये{\b0}
+Dialogue: 0,0:00:02.78,0:00:03.33,HormoziViral,,0,0,0,,{\b1}95 सेकंड्स{\b0}
+Dialogue: 0,0:00:03.33,0:00:03.89,HormoziViral,,0,0,0,,{\b1}आपके लाखों{\b0}
+Dialogue: 0,0:00:03.89,0:00:04.44,HormoziViral,,0,0,0,,{\b1}रुपये बचा{\b0}
+Dialogue: 0,0:00:04.44,0:00:05.00,HormoziViral,,0,0,0,,{\b1}सकते हैं!{\b0}
+Dialogue: 0,0:00:05.00,0:00:05.76,HormoziViral,,0,0,0,,{\b1}क्या कभी{\b0}
+Dialogue: 0,0:00:05.76,0:00:06.52,HormoziViral,,0,0,0,,{\b1}सोचा है{\b0}
+Dialogue: 0,0:00:06.52,0:00:07.29,HormoziViral,,0,0,0,,{\b1}कि आपका{\b0}
+Dialogue: 0,0:00:07.29,0:00:08.05,HormoziViral,,0,0,0,,{\b1}पैसा बैंक{\b0}
+Dialogue: 0,0:00:08.05,0:00:08.81,HormoziViral,,0,0,0,,{\b1}में सच{\b0}
+Dialogue: 0,0:00:08.81,0:00:09.57,HormoziViral,,0,0,0,,{\b1}में SAFE 🛡️{\b0}
+Dialogue: 0,0:00:09.57,0:00:10.33,HormoziViral,,0,0,0,,{\b1}है, या{\b0}
+Dialogue: 0,0:00:10.33,0:00:11.10,HormoziViral,,0,0,0,,{\b1}INFLATION उसे{\b0}
+Dialogue: 0,0:00:11.10,0:00:11.86,HormoziViral,,0,0,0,,{\b1}चुपके से{\b0}
+Dialogue: 0,0:00:11.86,0:00:12.62,HormoziViral,,0,0,0,,{\b1}खा रहा{\b0}
+Dialogue: 0,0:00:12.62,0:00:13.00,HormoziViral,,0,0,0,,{\b1}है?{\b0}
+Dialogue: 0,0:00:13.00,0:00:14.04,HormoziViral,,0,0,0,,{\b1}पहले बात{\b0}
+Dialogue: 0,0:00:14.04,0:00:15.09,HormoziViral,,0,0,0,,{\b1}करते हैं{\b0}
+Dialogue: 0,0:00:15.09,0:00:16.13,HormoziViral,,0,0,0,,{\b1}SIP की—SYSTEMATIC 📈{\b0}
+Dialogue: 0,0:00:16.13,0:00:17.17,HormoziViral,,0,0,0,,{\b1}INVESTMENT PLAN.{\b0}
+Dialogue: 0,0:00:17.17,0:00:18.22,HormoziViral,,0,0,0,,{\b1}हर महीने{\b0}
+Dialogue: 0,0:00:18.22,0:00:19.26,HormoziViral,,0,0,0,,{\b1}सिर्फ ₹1,000{\b0}
+Dialogue: 0,0:00:19.26,0:00:20.30,HormoziViral,,0,0,0,,{\b1}से आप{\b0}
+Dialogue: 0,0:00:20.30,0:00:21.35,HormoziViral,,0,0,0,,{\b1}देश की{\b0}
+Dialogue: 0,0:00:21.35,0:00:22.39,HormoziViral,,0,0,0,,{\b1}टॉप कंपनियों{\b0}
+Dialogue: 0,0:00:22.39,0:00:23.43,HormoziViral,,0,0,0,,{\b1}में हिस्सेदार{\b0}
+Dialogue: 0,0:00:23.43,0:00:24.48,HormoziViral,,0,0,0,,{\b1}बन सकते{\b0}
+Dialogue: 0,0:00:24.48,0:00:25.00,HormoziViral,,0,0,0,,{\b1}हैं।{\b0}
+Dialogue: 0,0:00:25.00,0:00:25.95,HormoziViral,,0,0,0,,{\b1}लेकिन ध्यान{\b0}
+Dialogue: 0,0:00:25.95,0:00:26.89,HormoziViral,,0,0,0,,{\b1}रहे, शेयर{\b0}
+Dialogue: 0,0:00:26.89,0:00:27.84,HormoziViral,,0,0,0,,{\b1}बाज़ार कोई{\b0}
+Dialogue: 0,0:00:27.84,0:00:28.79,HormoziViral,,0,0,0,,{\b1}जादू की{\b0}
+Dialogue: 0,0:00:28.79,0:00:29.74,HormoziViral,,0,0,0,,{\b1}छड़ी नहीं{\b0}
+Dialogue: 0,0:00:29.74,0:00:30.68,HormoziViral,,0,0,0,,{\b1}है। मार्केट{\b0}
+Dialogue: 0,0:00:30.68,0:00:31.63,HormoziViral,,0,0,0,,{\b1}क्रैश हुआ,{\b0}
+Dialogue: 0,0:00:31.63,0:00:32.58,HormoziViral,,0,0,0,,{\b1}तो पोर्टफोलियो{\b0}
+Dialogue: 0,0:00:32.58,0:00:33.53,HormoziViral,,0,0,0,,{\b1}लाल भी{\b0}
+Dialogue: 0,0:00:33.53,0:00:34.00,HormoziViral,,0,0,0,,{\b1}दिखेगा!{\b0}
+Dialogue: 0,0:00:34.00,0:00:35.10,HormoziViral,,0,0,0,,{\b1}अब आते{\b0}
+Dialogue: 0,0:00:35.10,0:00:36.20,HormoziViral,,0,0,0,,{\b1}हैं FIXED{\b0}
+Dialogue: 0,0:00:36.20,0:00:37.30,HormoziViral,,0,0,0,,{\b1}DEPOSIT पर।{\b0}
+Dialogue: 0,0:00:37.30,0:00:38.40,HormoziViral,,0,0,0,,{\b1}रिटर्न पक्का{\b0}
+Dialogue: 0,0:00:38.40,0:00:39.50,HormoziViral,,0,0,0,,{\b1}मिलता है,{\b0}
+Dialogue: 0,0:00:39.50,0:00:40.60,HormoziViral,,0,0,0,,{\b1}लेकिन टैक्स{\b0}
+Dialogue: 0,0:00:40.60,0:00:41.70,HormoziViral,,0,0,0,,{\b1}और INFLATION{\b0}
+Dialogue: 0,0:00:41.70,0:00:42.80,HormoziViral,,0,0,0,,{\b1}के बाद{\b0}
+Dialogue: 0,0:00:42.80,0:00:43.90,HormoziViral,,0,0,0,,{\b1}असली रिटर्न{\b0}
+Dialogue: 0,0:00:43.90,0:00:45.00,HormoziViral,,0,0,0,,{\b1}क्या है?{\b0}
+Dialogue: 0,0:00:45.00,0:00:46.11,HormoziViral,,0,0,0,,{\b1}7% FD 🏦{\b0}
+Dialogue: 0,0:00:46.11,0:00:47.22,HormoziViral,,0,0,0,,{\b1}में से{\b0}
+Dialogue: 0,0:00:47.22,0:00:48.33,HormoziViral,,0,0,0,,{\b1}30% टैक्स{\b0}
+Dialogue: 0,0:00:48.33,0:00:49.44,HormoziViral,,0,0,0,,{\b1}और 6%{\b0}
+Dialogue: 0,0:00:49.44,0:00:50.56,HormoziViral,,0,0,0,,{\b1}INFLATION घटाने{\b0}
+Dialogue: 0,0:00:50.56,0:00:51.67,HormoziViral,,0,0,0,,{\b1}पर आपका{\b0}
+Dialogue: 0,0:00:51.67,0:00:52.78,HormoziViral,,0,0,0,,{\b1}REAL RETURN{\b0}
+Dialogue: 0,0:00:52.78,0:00:53.89,HormoziViral,,0,0,0,,{\b1}NEGATIVE हो{\b0}
+Dialogue: 0,0:00:53.89,0:00:55.00,HormoziViral,,0,0,0,,{\b1}जाता है!{\b0}
+Dialogue: 0,0:00:55.00,0:00:55.95,HormoziViral,,0,0,0,,{\b1}और बैंक{\b0}
+Dialogue: 0,0:00:55.95,0:00:56.89,HormoziViral,,0,0,0,,{\b1}डूबने पर{\b0}
+Dialogue: 0,0:00:56.89,0:00:57.84,HormoziViral,,0,0,0,,{\b1}DICGC के 🛡️{\b0}
+Dialogue: 0,0:00:57.84,0:00:58.79,HormoziViral,,0,0,0,,{\b1}तहत सिर्फ{\b0}
+Dialogue: 0,0:00:58.79,0:00:59.74,HormoziViral,,0,0,0,,{\b1}₹5 लाख{\b0}
+Dialogue: 0,0:00:59.74,0:01:00.68,HormoziViral,,0,0,0,,{\b1}तक ही{\b0}
+Dialogue: 0,0:01:00.68,0:01:01.63,HormoziViral,,0,0,0,,{\b1}INSURED होते 🛡️{\b0}
+Dialogue: 0,0:01:01.63,0:01:02.58,HormoziViral,,0,0,0,,{\b1}हैं—चाहे आपके{\b0}
+Dialogue: 0,0:01:02.58,0:01:03.53,HormoziViral,,0,0,0,,{\b1}₹50 लाख{\b0}
+Dialogue: 0,0:01:03.53,0:01:04.00,HormoziViral,,0,0,0,,{\b1}हों!{\b0}
+Dialogue: 0,0:01:04.00,0:01:04.53,HormoziViral,,0,0,0,,{\b1}तो पैसा{\b0}
+Dialogue: 0,0:01:04.53,0:01:05.05,HormoziViral,,0,0,0,,{\b1}कहाँ लगायें?{\b0}
+Dialogue: 0,0:01:05.05,0:01:05.58,HormoziViral,,0,0,0,,{\b1}ये देखिये:{\b0}
+Dialogue: 0,0:01:05.58,0:01:06.11,HormoziViral,,0,0,0,,{\b1}TIER 1{\b0}
+Dialogue: 0,0:01:06.11,0:01:06.63,HormoziViral,,0,0,0,,{\b1}में ₹100{\b0}
+Dialogue: 0,0:01:06.63,0:01:07.16,HormoziViral,,0,0,0,,{\b1}से ₹5,000{\b0}
+Dialogue: 0,0:01:07.16,0:01:07.68,HormoziViral,,0,0,0,,{\b1}वाले MUTUAL{\b0}
+Dialogue: 0,0:01:07.68,0:01:08.21,HormoziViral,,0,0,0,,{\b1}FUNDS, ETFS,{\b0}
+Dialogue: 0,0:01:08.21,0:01:08.74,HormoziViral,,0,0,0,,{\b1}STOCKS और{\b0}
+Dialogue: 0,0:01:08.74,0:01:09.00,HormoziViral,,0,0,0,,{\b1}PPF.{\b0}
+Dialogue: 0,0:01:09.00,0:01:09.71,HormoziViral,,0,0,0,,{\b1}TIER 2{\b0}
+Dialogue: 0,0:01:09.71,0:01:10.43,HormoziViral,,0,0,0,,{\b1}में ₹10,000{\b0}
+Dialogue: 0,0:01:10.43,0:01:11.14,HormoziViral,,0,0,0,,{\b1}से ₹5{\b0}
+Dialogue: 0,0:01:11.14,0:01:11.86,HormoziViral,,0,0,0,,{\b1}लाख वाले{\b0}
+Dialogue: 0,0:01:11.86,0:01:12.57,HormoziViral,,0,0,0,,{\b1}GOVERNMENT SECURITIES,{\b0}
+Dialogue: 0,0:01:12.57,0:01:13.29,HormoziViral,,0,0,0,,{\b1}SGB और 🪙{\b0}
+Dialogue: 0,0:01:13.29,0:01:14.00,HormoziViral,,0,0,0,,{\b1}CORPORATE BONDS.{\b0}
+Dialogue: 0,0:01:14.00,0:01:14.67,HormoziViral,,0,0,0,,{\b1}और TIER{\b0}
+Dialogue: 0,0:01:14.67,0:01:15.33,HormoziViral,,0,0,0,,{\b1}3 में{\b0}
+Dialogue: 0,0:01:15.33,0:01:16.00,HormoziViral,,0,0,0,,{\b1}REAL ESTATE,{\b0}
+Dialogue: 0,0:01:16.00,0:01:16.67,HormoziViral,,0,0,0,,{\b1}₹50 लाख{\b0}
+Dialogue: 0,0:01:16.67,0:01:17.33,HormoziViral,,0,0,0,,{\b1}वाला PMS,{\b0}
+Dialogue: 0,0:01:17.33,0:01:18.00,HormoziViral,,0,0,0,,{\b1}और ₹1{\b0}
+Dialogue: 0,0:01:18.00,0:01:18.67,HormoziViral,,0,0,0,,{\b1}करोड़ वाला{\b0}
+Dialogue: 0,0:01:18.67,0:01:19.00,HormoziViral,,0,0,0,,{\b1}AIF.{\b0}
+Dialogue: 0,0:01:19.00,0:01:20.00,HormoziViral,,0,0,0,,{\b1}हमारे अगले{\b0}
+Dialogue: 0,0:01:20.00,0:01:21.00,HormoziViral,,0,0,0,,{\b1}रील्स: SIP 📈{\b0}
+Dialogue: 0,0:01:21.00,0:01:22.00,HormoziViral,,0,0,0,,{\b1}VS LUMP{\b0}
+Dialogue: 0,0:01:22.00,0:01:23.00,HormoziViral,,0,0,0,,{\b1}SUM, FD 🏦{\b0}
+Dialogue: 0,0:01:23.00,0:01:24.00,HormoziViral,,0,0,0,,{\b1}VS DEBT{\b0}
+Dialogue: 0,0:01:24.00,0:01:25.00,HormoziViral,,0,0,0,,{\b1}FUNDS, और{\b0}
+Dialogue: 0,0:01:25.00,0:01:26.00,HormoziViral,,0,0,0,,{\b1}FIRST ₹1,000{\b0}
+Dialogue: 0,0:01:26.00,0:01:27.00,HormoziViral,,0,0,0,,{\b1}कहाँ लगायें!{\b0}
+Dialogue: 0,0:01:27.00,0:01:28.78,HormoziViral,,0,0,0,,{\b1}अभी FOLLOW 👉{\b0}
+Dialogue: 0,0:01:28.78,0:01:30.56,HormoziViral,,0,0,0,,{\b1}बटन दबाइये{\b0}
+Dialogue: 0,0:01:30.56,0:01:32.33,HormoziViral,,0,0,0,,{\b1}और बनिए{\b0}
+Dialogue: 0,0:01:32.33,0:01:34.11,HormoziViral,,0,0,0,,{\b1}एक स्मार्ट{\b0}
+Dialogue: 0,0:01:34.11,0:01:35.00,HormoziViral,,0,0,0,,{\b1}इन्वेस्टर!{\b0}

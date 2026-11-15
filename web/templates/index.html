@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Finance Reel Factory — AI Video Studio</title>
+  <title>Finance Reel Factory — Viral AI Video Platform</title>
   <link rel="stylesheet" href="/static/style.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -17,7 +17,7 @@
         <span class="logo-icon">🎬</span>
         <div>
           <h1>Finance Reel Factory</h1>
-          <p class="tagline">Local-First AI Video Platform • Ollama + Neural Speech + Burned-in Captions</p>
+          <p class="tagline">Local-First AI Video Platform • PPT Maker + Viral Cat Memes + Expressive Neural Voice + Hormozi Captions</p>
         </div>
       </div>
       <div class="header-badges">
@@ -53,23 +53,22 @@
             <span class="ai-badge">✨ Local Ollama AI Assistant</span>
             <div class="model-select-group">
               <select id="ollama-model-select">
-                <option value="llama3.2:1b">llama3.2:1b (Fast CPU)</option>
-                <option value="llama3.2">llama3.2 (Default)</option>
+                <option value="llama3.2:1b" selected>llama3.2:1b (Fast CPU Ready)</option>
                 <option value="qwen2.5:1.5b">qwen2.5:1.5b</option>
                 <option value="mistral">mistral</option>
               </select>
               <button id="btn-pull-model" class="btn btn-secondary btn-sm" title="Pull/Download Model to Ollama">Pull</button>
             </div>
           </div>
-          <label for="ai-prompt" class="sub-label">Prompt or Improvement Request:</label>
-          <textarea id="ai-prompt" rows="3" placeholder="e.g. 'Write a 60-second viral reel comparing SIP vs FD for salaried freshers' or 'Thoda improve karo, make hook more shocking and add inflation math'"></textarea>
+          <label for="ai-prompt" class="sub-label">Prompt or Improvement Request ("Thoda improve karo"):</label>
+          <textarea id="ai-prompt" rows="3" placeholder="e.g. 'Compare SIP vs FD with shocking hook and inflation calculation' or 'Thoda improve karo, make hook more shocking and add crying cat reaction'"></textarea>
           
           <div class="ai-btn-group">
             <button id="btn-generate-script" class="btn btn-ai">
               <span>⚡ Generate Script with Ollama</span>
             </button>
             <button id="btn-refine-script" class="btn btn-outline">
-              <span>🔄 Refine / Improve Script</span>
+              <span>🔄 Refine / "Thoda Improve Karo"</span>
             </button>
           </div>
         </div>
@@ -77,48 +76,95 @@
         <!-- Script Editor -->
         <div class="form-group mt-3">
           <div class="label-with-hint">
-            <label for="script-content">Voiceover Script (Editable)</label>
-            <span class="hint">Clean Hinglish text for speech & captions</span>
+            <label for="script-content">Voiceover Narration Script (Hinglish)</label>
+            <span class="hint">Will be spoken with expressive neural prosody</span>
           </div>
-          <textarea id="script-content" rows="7">अगर आप SIP या FD कर रहे हो, तो ये पचानवे सेकंड्स आपके लाखों रुपये बचा सकते हैं!
-क्या कभी सोचा है कि आपका पैसा बैंक में सच में safe है, या inflation उसे चुपके से खा रहा है?
+          <textarea id="script-content" rows="6">अगर आप SIP या FD कर रहे हो, तो ये पचानवे सेकंड्स आपके लाखों बचा सकते हैं!
+क्या कभी सोचा है कि आपका पैसा बैंक में सच में SAFE है, या inflation उसे चुपके से खा रहा है?
 पहले बात करते हैं SIP की। हर महीने सिर्फ ₹1,000 से आप देश की टॉप कंपनियों में हिस्सेदार बनते हैं।
-लेकिन ध्यान रहे, शेयर बाज़ार में मार्केट क्रैश होने पर पोर्टफोलियो लाल भी दिखेगा!
-अब आते हैं FD पर। 7% FD में से 30% टैक्स और 6% inflation घटाने पर आपका REAL RETURN negative हो जाता है!
-और बैंक डूबने पर DICGC के तहत सिर्फ ₹5 लाख तक ही insured होते हैं—चाहे आपके ₹50 लाख हों!
-तो पैसा कहाँ लगायें? Mutual Funds, Government Securities, SGB और Real Estate का पूरा मैप समझिए।
+लेकिन FD में 7% ब्याज में से 30% टैक्स और 6% inflation घटाने पर REAL RETURN negative हो जाता है!
+और बैंक डूबने पर DICGC के तहत सिर्फ ₹5 लाख तक ही insured होते हैं!
+तो पैसा कहाँ लगायें? Mutual Funds, G-Sec और SGB का पूरा मैप समझिए।
 अभी Follow बटन दबाइये और बनिए एक स्मार्ट इन्वेस्टर!</textarea>
         </div>
 
-        <!-- Voice & Settings -->
+        <!-- Step 2: Viral Reaction Cat Memes & Internet Grabber -->
         <div class="panel-header mt-4">
-          <h2>2. Voice & Templates</h2>
+          <h2>2. Viral Cat Memes & Internet Templates</h2>
           <span class="step-num">Step 2</span>
+        </div>
+
+        <div class="cat-meme-section">
+          <div class="cat-picker-header">
+            <label>Reaction Cat Meme Theme</label>
+            <button id="btn-search-cats-modal" class="btn btn-secondary btn-sm">
+              <span>🌐 Search Cats from Internet</span>
+            </button>
+          </div>
+          
+          <div id="cat-templates-bar" class="cat-templates-bar">
+            <!-- Dynamically populated from /api/cats/templates -->
+          </div>
+
+          <!-- Internet Search Drawer (Collapsible) -->
+          <div id="internet-cat-drawer" class="internet-drawer hidden">
+            <div class="search-input-group">
+              <input type="text" id="internet-cat-query" placeholder="e.g. 'crying cat meme', 'funny shock cat', 'cat gold glasses'">
+              <button id="btn-do-cat-search" class="btn btn-primary btn-sm">Search Wikimedia</button>
+            </div>
+            <div id="internet-cat-results" class="internet-results-grid"></div>
+          </div>
+        </div>
+
+        <!-- Step 3: Expressive Voiceover & Hormozi Captions -->
+        <div class="panel-header mt-4">
+          <h2>3. Expressive Voiceover & Hormozi Captions</h2>
+          <span class="step-num">Step 3</span>
         </div>
 
         <div class="form-row">
           <div class="form-group flex-1">
             <label for="voice-select">Narrator Voice</label>
             <select id="voice-select">
-              <option value="hi-IN-MadhurNeural" selected>Hindi Male — Madhur (Energetic / Viral)</option>
-              <option value="hi-IN-SwaraNeural">Hindi Female — Swara (Clear / Professional)</option>
+              <option value="hi-IN-MadhurNeural" selected>Hindi Male — Madhur (Punchy)</option>
+              <option value="hi-IN-SwaraNeural">Hindi Female — Swara (Clear)</option>
               <option value="en-IN-PrabhatNeural">Indian English Male — Prabhat</option>
               <option value="en-IN-NeerjaNeural">Indian English Female — Neerja</option>
+            </select>
+          </div>
+          <div class="form-group flex-1">
+            <label for="voice-style-select">Voice Expression & Energy</label>
+            <select id="voice-style-select">
+              <option value="viral_energetic" selected>⚡ Viral Energetic (+18% Speed, +5Hz Pitch)</option>
+              <option value="dramatic_alert">🚨 Dramatic Scam/Reality Alert (+12% Speed, +8Hz)</option>
+              <option value="savvy_mentor">📈 Savvy Wealth Mentor (+14% Speed, +2Hz)</option>
+              <option value="ultra_shorts">🚀 Ultra-Fast 30s Shorts (+24% Speed, +6Hz)</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-row mt-2">
+          <div class="form-group flex-1">
+            <label for="caption-style-select">Caption Style (Hormozi / Viral)</label>
+            <select id="caption-style-select">
+              <option value="electric_yellow" selected>⚡ Electric Yellow (Hormozi 1-2 words)</option>
+              <option value="neon_green">🟢 Neon Green High Voltage</option>
+              <option value="punchy_white">⚪ Punchy Crisp White</option>
             </select>
           </div>
           <div class="form-group flex-1 flex-center">
             <label class="checkbox-container">
               <input type="checkbox" id="burn-subtitles" checked>
               <span class="checkmark"></span>
-              Burn Instagram Captions into Video
+              Burn Viral Captions + Whoosh/Boom SFX
             </label>
           </div>
         </div>
 
-        <!-- Main Action Button -->
+        <!-- Step 4: Render Full Reel & PPTX -->
         <div class="mt-4">
           <button id="btn-render-reel" class="btn btn-primary btn-large">
-            <span id="render-btn-text">🎬 Generate & Render Full Reel</span>
+            <span id="render-btn-text">🎬 Generate Video + PowerPoint Deck (.pptx)</span>
             <div id="render-spinner" class="spinner hidden"></div>
           </button>
         </div>
@@ -129,11 +175,11 @@
         </div>
       </section>
 
-      <!-- Right Panel: Live Video Player & Inspection -->
+      <!-- Right Panel: Live Video Player & Downloads -->
       <section class="studio-panel preview-panel">
         <div class="panel-header">
-          <h2>3. Live Preview & Player</h2>
-          <span class="step-num">Step 3</span>
+          <h2>4. Live Preview & Multi-Format Downloads</h2>
+          <span class="step-num">Step 4</span>
         </div>
 
         <!-- 9:16 Vertical Phone Video Player -->
@@ -147,26 +193,29 @@
               </video>
               <div id="video-placeholder" class="video-empty-state hidden">
                 <span class="empty-icon">🎥</span>
-                <p>No video generated yet.<br>Click "Generate & Render Full Reel" to build!</p>
+                <p>No video generated yet.<br>Click "Generate Video + PowerPoint Deck" to build!</p>
               </div>
             </div>
           </div>
         </div>
 
-        <!-- Video Quick Actions -->
+        <!-- Multi-Format Quick Actions -->
         <div class="download-bar mt-3">
           <a id="btn-download-mp4" href="/api/video/REEL_001_SIP_FD_REALITY_CHECK" download="reel_final.mp4" class="btn btn-success">
             <span>📥 Download MP4 Video</span>
           </a>
+          <a id="btn-download-pptx" href="/api/pptx/REEL_001_SIP_FD_REALITY_CHECK" download="presentation.pptx" class="btn btn-accent">
+            <span>📊 Download PowerPoint (.pptx)</span>
+          </a>
           <a id="btn-download-zip" href="/api/download/REEL_001_SIP_FD_REALITY_CHECK" class="btn btn-secondary">
-            <span>📦 Download Delivery Pack (.zip)</span>
+            <span>📦 Full Delivery Pack (.zip)</span>
           </a>
         </div>
 
         <!-- Slide Deck Thumbnails -->
         <div class="slide-deck-preview mt-4">
           <div class="label-with-hint">
-            <label>Rendered Slide Deck</label>
+            <label>Synchronized Slide Deck (with Cat Memes)</label>
             <span class="hint">Click to inspect full resolution</span>
           </div>
           <div id="slide-thumbnails-grid" class="thumbnails-grid">

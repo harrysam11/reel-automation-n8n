@@ -202,3 +202,29 @@ def template_outro(tag, title, cta_headline, upcoming_list, disclaimer):
         d.text((540, y_disc), line, fill=TEXT_MUTED, anchor="mm", font=get_font(22, bold=False))
         y_disc += 40
     return img
+
+def template_cat_meme(tag, title, cat_image_path, top_caption, bottom_caption):
+    """Template 7: Viral Reaction Cat Meme Layout"""
+    img = create_base_canvas()
+    d = ImageDraw.Draw(img)
+    draw_header(d, title, tag)
+    
+    # Meme Card Container
+    d.rounded_rectangle([80, 380, 1000, 1720], radius=30, fill=CARD_BG, outline=TEXT_DARK, width=5)
+    
+    # Top meme text
+    y = 460
+    for line in top_caption.split("\n"):
+        d.text((540, y), line, fill=TEXT_DARK, anchor="mm", font=get_font(34, bold=True))
+        y += 50
+    
+    # Reaction Cat
+    paste_centered_image(img, cat_image_path, center_y=1020, max_w=640, max_h=640)
+    
+    # Bottom meme punchline
+    y = 1550
+    for line in bottom_caption.split("\n"):
+        d.text((540, y), line, fill=RED_ACCENT, anchor="mm", font=get_font(38, bold=True))
+        y += 55
+    return img
+

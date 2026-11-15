@@ -1,13 +1,14 @@
 #!/usr/bin/env python3
 """
-Finance Reel Factory - Interactive Web Platform.
+Finance Reel Factory - Complete Interactive Web Platform.
 Features:
-- Live Video Player (play & check before download)
-- Ollama AI Script Assistant (draft, prompt, iterate & refine scripts)
-- Model Manager (pull/download models from web UI)
-- Template Selector (Hook, Comparison, Alert, Stat, Tier List, Outro)
-- Real Neural Voice Synthesizer with burned-in subtitles
-- One-click downloads (MP4 & delivery package)
+- Live 9:16 Video Player (Scrub & inspect before download)
+- PPT Maker (1-Click Editable .pptx Presentation Deck)
+- Local Ollama AI Script Assistant (Prompt, Iterate & "Thoda improve karo")
+- Viral Hormozi-Style Captions (Electric Yellow, Thick Stroke, Emojis, 1-2 words)
+- Expressive Neural Voiceover with SFX Layering (Whoosh & Boom)
+- Viral Cat Meme Template Gallery & Internet Cat Search
+- Multi-format delivery downloads (.mp4, .pptx, full .zip pack)
 """
 import os
 import sys
@@ -25,7 +26,10 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 if BASE_DIR not in sys.path:
     sys.path.insert(0, BASE_DIR)
 
-from generate_new_reel import build_reel
+from engine.ppt_maker import build_pptx_deck, generate_slides_from_deck
+from engine.tts_engine import synthesize_reel_audio
+from engine.video_builder import render_reel_with_subtitles
+from scripts.asset_finder import search_commons_assets, grab_asset
 
 app = FastAPI(title="Finance Reel Factory Studio")
 app.mount("/static", StaticFiles(directory=os.path.join(BASE_DIR, "web", "static")), name="static")
@@ -45,12 +49,23 @@ class ScriptPromptRequest(BaseModel):
 class PullModelRequest(BaseModel):
     model: str
 
+class InternetCatSearchRequest(BaseModel):
+    query: Optional[str] = "funny cat meme"
+    limit: Optional[int] = 6
+
+class GrabCatRequest(BaseModel):
+    asset_url: str
+    cat_name: str
+
 class RenderRequest(BaseModel):
     project_id: str
     title: str
     script_text: str
     voice: Optional[str] = "hi-IN-MadhurNeural"
+    voice_style: Optional[str] = "viral_energetic"
+    caption_style: Optional[str] = "electric_yellow"
     burn_subtitles: Optional[bool] = True
+    cat_theme: Optional[str] = "viral_cats"
 
 # ------------------------------------------------------------------------------
 # Routes: Core Web Dashboard
@@ -97,7 +112,6 @@ def list_ollama_models():
 @app.post("/api/ollama/pull")
 def pull_ollama_model(req: PullModelRequest):
     try:
-        # Start pull in Ollama
         r = requests.post(f"{OLLAMA_HOST}/api/pull", json={"name": req.model, "stream": False}, timeout=120)
         return {"success": True, "message": f"Model {req.model} pull status: {r.status_code}"}
     except Exception as e:
@@ -107,10 +121,11 @@ def pull_ollama_model(req: PullModelRequest):
 def generate_ai_script(req: ScriptPromptRequest):
     system_prompt = (
         "You are an expert Indian finance content creator making high-retention 60-90 second Instagram Reels and YouTube Shorts. "
-        "Tone: Savvy, humorous, sharp, disciplined. "
-        "Style: Hinglish (natural spoken Hindi written in Devanagari or Latin script, with crisp English financial terms like SIP, FD, DICGC, CAGR, Index Fund). "
-        "Rules: Keep sentences punchy and short. Include a shocking hook in the first 5 seconds, an explanation, a risk/reality check, and a clear follow CTA. "
-        "Return ONLY the spoken narration lines, one paragraph per slide scene."
+        "Tone: Savvy, humorous, sharp, energetic. "
+        "Style: Hinglish (natural spoken Hindi in Devanagari or Latin script, with crisp English financial terms like SIP, FD, DICGC, CAGR, Index Fund). "
+        "Rules: Keep sentences punchy, short, and dynamic. Include an attention-grabbing shock hook in the first 5 seconds, "
+        "an explanation, a risk/reality check with math, and a clear follow CTA. "
+        "Return ONLY the spoken narration lines."
     )
     
     if req.instruction == "refine" and req.current_script:
@@ -136,7 +151,6 @@ def generate_ai_script(req: ScriptPromptRequest):
             content = r.json().get("message", {}).get("content", "")
             return {"success": True, "script": content}
         else:
-            # Fallback if model not found
             return {
                 "success": False,
                 "error": f"Ollama error {r.status_code}. Is model '{req.model}' downloaded? You can pull it from the Model tab."
@@ -145,33 +159,118 @@ def generate_ai_script(req: ScriptPromptRequest):
         return {"success": False, "error": f"Cannot connect to Ollama: {str(e)}"}
 
 # ------------------------------------------------------------------------------
-# Routes: Video Generation & Pipeline
+# Routes: Cat Meme Templates & Internet Search
+# ------------------------------------------------------------------------------
+@app.get("/api/cats/templates")
+def list_cat_templates():
+    cats_dir = os.path.join(BASE_DIR, "assets", "cats")
+    os.makedirs(cats_dir, exist_ok=True)
+    files = sorted([f for f in os.listdir(cats_dir) if f.endswith((".png", ".jpg", ".jpeg"))])
+    items = []
+    for f in files:
+        name = os.path.splitext(f)[0].replace("_", " ").title()
+        items.append({
+            "id": f,
+            "name": name,
+            "url": f"/api/cat_img/{f}"
+        })
+    return {"cats": items}
+
+@app.get("/api/cat_img/{cat_name}")
+def get_cat_image(cat_name: str):
+    cat_path = os.path.join(BASE_DIR, "assets", "cats", cat_name)
+    if not os.path.exists(cat_path):
+        raise HTTPException(status_code=404, detail="Cat image not found")
+    media = "image/png" if cat_name.endswith(".png") else "image/jpeg"
+    return FileResponse(cat_path, media_type=media)
+
+@app.post("/api/cats/fetch_internet")
+def fetch_internet_cats(req: InternetCatSearchRequest):
+    try:
+        results = search_commons_assets(req.query, limit=req.limit or 6)
+        return {"success": True, "results": results}
+    except Exception as e:
+        return {"success": False, "error": str(e), "results": []}
+
+@app.post("/api/cats/grab")
+def grab_cat_from_web(req: GrabCatRequest):
+    try:
+        clean_name = "".join([c if c.isalnum() else "_" for c in req.cat_name.lower()])[:30] + ".jpg"
+        dest_rel = os.path.join("assets", "cats", clean_name)
+        manifest = os.path.join("PROJECTS", "asset_manifest.csv")
+        grab_asset(req.asset_url, dest_rel, manifest, category="viral_cat", notes="User web-grabbed cat meme")
+        return {"success": True, "filename": clean_name, "url": f"/api/cat_img/{clean_name}"}
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
+# ------------------------------------------------------------------------------
+# Routes: Video & PPT Generation Pipeline
 # ------------------------------------------------------------------------------
 @app.post("/api/render")
 def trigger_render(req: RenderRequest):
     project_id = req.project_id.strip() or "REEL_NEW_PROJECT"
     proj_dir = os.path.join(BASE_DIR, "PROJECTS", project_id)
-    os.makedirs(os.path.join(proj_dir, "02_SCRIPT"), exist_ok=True)
+    slides_dir = os.path.join(proj_dir, "05_SLIDES")
+    audio_dir = os.path.join(proj_dir, "03_AUDIO")
+    sub_dir = os.path.join(proj_dir, "06_SUBTITLES")
+    export_dir = os.path.join(proj_dir, "08_EXPORT")
     
+    for d in [slides_dir, audio_dir, sub_dir, export_dir, os.path.join(proj_dir, "02_SCRIPT")]:
+        os.makedirs(d, exist_ok=True)
+        
     # Save script
     script_path = os.path.join(proj_dir, "02_SCRIPT", "voiceover_clean.txt")
     with open(script_path, "w", encoding="utf-8") as f:
         f.write(req.script_text)
         
     try:
-        build_reel(
-            project_id=project_id,
-            title=req.title,
-            voice=req.voice,
-            burn_subtitles=req.burn_subtitles
+        # 1. Build PowerPoint Deck (.pptx) & High-Res PNG Slides with Cat Memes
+        pptx_path = os.path.join(slides_dir, f"{project_id}_presentation.pptx")
+        build_pptx_deck(project_id, req.title, pptx_path, cat_theme=req.cat_theme or "viral_cats")
+        slides = generate_slides_from_deck(project_id, req.title, slides_dir)
+        
+        # 2. Synthesize Expressive Audio with SFX
+        audio_path = os.path.join(audio_dir, "voiceover.mp3")
+        srt_path = os.path.join(sub_dir, "captions.srt")
+        synthesize_reel_audio(
+            text=req.script_text,
+            output_audio=audio_path,
+            output_srt=srt_path,
+            voice_key=req.voice or "hi-IN-MadhurNeural",
+            style_key=req.voice_style or "viral_energetic"
         )
-        video_url = f"/api/video/{project_id}"
-        zip_url = f"/api/download/{project_id}"
+        
+        # 3. Assemble Vertical Video with Burned-in Hormozi-Style Captions
+        out_mp4 = os.path.join(export_dir, "reel_final.mp4")
+        render_reel_with_subtitles(
+            slides_list=slides,
+            audio_path=audio_path,
+            srt_or_vtt_path=srt_path,
+            output_mp4=out_mp4,
+            burn_subtitles=req.burn_subtitles,
+            caption_style=req.caption_style or "electric_yellow"
+        )
+        
+        # 4. Package Delivery ZIP (including .pptx)
+        zip_path = os.path.join(BASE_DIR, "OUTPUTS", f"{project_id}_DELIVERY_PACK.zip")
+        os.makedirs(os.path.dirname(zip_path), exist_ok=True)
+        import zipfile
+        with zipfile.ZipFile(zip_path, "w", zipfile.ZIP_DEFLATED) as z:
+            z.write(out_mp4, "video/reel_final.mp4")
+            z.write(audio_path, "audio/voiceover.mp3")
+            if os.path.exists(pptx_path):
+                z.write(pptx_path, f"presentation/{os.path.basename(pptx_path)}")
+            if os.path.exists(srt_path):
+                z.write(srt_path, "subtitles/captions.srt")
+            for s in slides:
+                z.write(s, f"slides/{os.path.basename(s)}")
+
         return {
             "success": True,
             "project_id": project_id,
-            "video_url": video_url,
-            "download_zip": zip_url
+            "video_url": f"/api/video/{project_id}",
+            "pptx_url": f"/api/pptx/{project_id}",
+            "download_zip": f"/api/download/{project_id}"
         }
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Render error: {str(e)}")
@@ -191,7 +290,6 @@ def stream_video(project_id: str, request: Request):
     range_header = request.headers.get("range")
     
     if range_header:
-        # Byte-range request for smooth seeking in HTML5 video player
         bytes_str = range_header.replace("bytes=", "")
         start, end = bytes_str.split("-")
         start = int(start)
@@ -218,6 +316,21 @@ def stream_video(project_id: str, request: Request):
         return StreamingResponse(iter_file(), status_code=206, headers=headers)
         
     return FileResponse(video_path, media_type="video/mp4")
+
+@app.get("/api/pptx/{project_id}")
+def download_pptx_deck(project_id: str):
+    pptx_path = os.path.join(BASE_DIR, "PROJECTS", project_id, "05_SLIDES", f"{project_id}_presentation.pptx")
+    if not os.path.exists(pptx_path):
+        pptx_path = os.path.join(BASE_DIR, "PROJECTS", project_id, "05_SLIDES", "presentation.pptx")
+    if not os.path.exists(pptx_path):
+        pptx_path = os.path.join(BASE_DIR, "PROJECTS", project_id, "05_SLIDES", "reel_001_slides.pptx")
+    if not os.path.exists(pptx_path):
+        raise HTTPException(status_code=404, detail="PowerPoint deck not found. Generate reel first.")
+    return FileResponse(
+        pptx_path,
+        filename=f"{project_id}_presentation.pptx",
+        media_type="application/vnd.openxmlformats-officedocument.presentationml.presentation"
+    )
 
 @app.get("/api/slides/{project_id}")
 def get_slide_thumbnails(project_id: str):
