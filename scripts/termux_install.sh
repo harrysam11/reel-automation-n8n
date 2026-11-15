@@ -21,6 +21,7 @@ pkg install -y \
     python-pip \
     python-pillow \
     python-numpy \
+    python-cffi \
     ffmpeg \
     libsndfile \
     libjpeg-turbo \

@@ -7,9 +7,9 @@ Automatically inserts natural pauses between scenes and outputs WAV + MP3.
 import os
 import sys
 import subprocess
-import numpy as np
-import soundfile as sf
-from kokoro_onnx import Kokoro
+import math
+import wave
+import struct
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 env_file = os.path.join(BASE_DIR, ".env")
@@ -48,13 +48,15 @@ def generate_reel_voiceover(script_path, output_wav, voice=None, speed=None):
     speed = speed if speed is not None else DEFAULT_SPEED
     os.makedirs(os.path.dirname(output_wav), exist_ok=True)
     
-    # Check if Kokoro is available
+    # Check if Kokoro, soundfile, and numpy are all available
     kokoro_available = False
     try:
         from kokoro_onnx import Kokoro
+        import soundfile as sf
+        import numpy as np
         if os.path.exists(MODEL_PATH) and os.path.exists(VOICES_PATH):
             kokoro_available = True
-    except ImportError:
+    except (ImportError, Exception):
         pass
 
     if not kokoro_available:
