@@ -21,17 +21,20 @@ PURPLE_ACCENT = (147, 51, 234)   # HNI Purple
 CARD_BG = (255, 255, 255)        # Pure White
 CARD_BORDER = (210, 200, 185)    # Border
 
+# Resampling filter compatibility across Pillow versions (Pillow 7.x to 11.x)
+try:
+    RESAMPLE_FILTER = Image.Resampling.LANCZOS
+except AttributeError:
+    RESAMPLE_FILTER = getattr(Image, 'LANCZOS', getattr(Image, 'ANTIALIAS', 1))
+
 def get_font(size, bold=False):
-    """Find available fonts across Linux and Termux."""
+    """Find available fonts: bundles first, then system."""
     font_candidates = [
-        # Linux host noto fonts
-        "/usr/share/fonts/truetype/noto/NotoSans-Bold.ttf" if bold else "/usr/share/fonts/truetype/noto/NotoSans-Regular.ttf",
-        "/usr/share/fonts/opentype/noto/NotoSans-Bold.ttf" if bold else "/usr/share/fonts/opentype/noto/NotoSans-Regular.ttf",
-        "/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf" if bold else "/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf",
-        # Android / Termux system fonts
+        f"{BASE_DIR}/fonts/NotoSans-Bold.ttf" if bold else f"{BASE_DIR}/fonts/NotoSans-Regular.ttf",
         "/system/fonts/Roboto-Bold.ttf" if bold else "/system/fonts/Roboto-Regular.ttf",
         "/system/fonts/NotoSansDevanagari-Bold.ttf" if bold else "/system/fonts/NotoSansDevanagari-Regular.ttf",
-        f"{BASE_DIR}/fonts/NotoSans-Bold.ttf" if bold else f"{BASE_DIR}/fonts/NotoSans-Regular.ttf"
+        "/usr/share/fonts/truetype/noto/NotoSans-Bold.ttf" if bold else "/usr/share/fonts/truetype/noto/NotoSans-Regular.ttf",
+        "/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf" if bold else "/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf"
     ]
     for path in font_candidates:
         if os.path.exists(path):
@@ -39,7 +42,10 @@ def get_font(size, bold=False):
                 return ImageFont.truetype(path, size)
             except Exception:
                 continue
-    return ImageFont.load_default()
+    try:
+        return ImageFont.load_default(size=size)
+    except TypeError:
+        return ImageFont.load_default()
 
 def draw_header(draw, title, category="FINANCE REALITY CHECK"):
     # Header tag pill
@@ -65,7 +71,7 @@ def paste_centered_image(img, image_path, center_y, max_width=500, max_height=50
     try:
         with Image.open(image_path) as overlay:
             overlay = overlay.convert("RGBA")
-            overlay.thumbnail((max_width, max_height), Image.Resampling.LANCZOS)
+            overlay.thumbnail((max_width, max_height), RESAMPLE_FILTER)
             w, h = overlay.size
             pos = ((1080 - w) // 2, center_y - (h // 2))
             img.paste(overlay, pos, overlay)
@@ -337,6 +343,15 @@ def render_slide_12(out_path):
 
 def render_all_slides(output_dir):
     os.makedirs(output_dir, exist_ok=True)
+    # Ensure placeholder images exist
+    main_cat = os.path.join(BASE_DIR, "BRAND", "main_cat.png")
+    if not os.path.exists(main_cat):
+        try:
+            import subprocess
+            subprocess.run([sys.executable, os.path.join(BASE_DIR, "scripts", "create_placeholders.py")], check=True)
+        except Exception as e:
+            print(f"Notice auto-creating placeholders: {e}")
+
     renderers = [
         render_slide_1, render_slide_2, render_slide_3, render_slide_4,
         render_slide_5, render_slide_6, render_slide_7, render_slide_8,
