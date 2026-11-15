@@ -53,22 +53,40 @@ Run the automated installer to set up the Python venv, download the open Kokoro 
 ./scripts/install.sh
 ```
 
-### B. Run the Full Reel Pipeline (One Command)
+### B. Run the Full Reel Pipeline (One Command on PC)
 Builds slides, exports PNGs, generates Kokoro voiceover, stitches the vertical MP4, and packages everything:
 ```bash
 ./scripts/run_all.sh
 ```
 
-### C. Start / Stop the Local n8n Bridge Daemon
-To let self-hosted n8n trigger render and asset tasks in the background:
+---
+
+## 3. Mobile Setup: RAW TERMUX (Android Native)
+**Zero Docker, Zero udocker, Zero proot needed!** Runs 100% natively on ARM64 Android.
+
+### A. One-Time Setup in Termux
+Inside your Termux terminal on Android:
 ```bash
-./scripts/start_api.sh   # Starts background daemon on port 8085
-./scripts/stop_api.sh    # Stops the daemon
+# 1. Clone repository into Termux
+git clone https://github.com/harrysam11/reel-automation-n8n.git
+cd reel-automation-n8n
+
+# 2. Run raw Termux native installer
+chmod +x scripts/*.sh
+./scripts/termux_install.sh
 ```
+
+### B. Generate Reel Directly on Phone
+```bash
+./scripts/termux_run.sh
+```
+* **Instant Slide Rendering**: Uses `scripts/render_slides_native.py` via Pillow (100% native, zero LibreOffice required!).
+* **ARM64 Accelerated Video**: Uses Termux's native NEON-accelerated FFmpeg.
+* **Direct Export to Phone Downloads**: The rendered `1080x1920` MP4 reel is automatically placed in your phone's `Downloads` folder, ready to inspect, watch in your Gallery, and upload directly to Instagram!
 
 ---
 
-## 3. Individual Step-by-Step Commands (Manual Control)
+## 4. Desktop Daemon & n8n Bridge (PC)
 The 3 capital-map slides retain all 14 investment categories and indicative entry ranges:
 - **Tier 1 (₹100 – ₹5,000):** Mutual Funds, ETFs, Direct Stocks, PPF/EPF/SSY, NPS, FDs/RDs.
 - **Tier 2 (₹10,000 – ₹5 Lakh):** Government Securities (RBI Retail Direct), REITs/InvITs, SGB, Corporate Bonds/NCDs, P2P/Invoice Investing.
